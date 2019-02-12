@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/Ehawk82/terra/issues"
   },
-  "homepage": "https://github.com/Ehawk82/terra#readme"
+  "homepage": "https://github.com/Ehawk82/terra#readme",
+  "devDependencies": {
+    "gScript2019": "git+https://github.com/Ehawk82/gScript2019.git"
+  }
 }

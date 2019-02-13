@@ -10,9 +10,12 @@ myUI = {
 		myUI.loader(h,w);
 	},
 	loader: (h,w) => {
-		var dp = createEle("div");
+		var dp = createEle("div"),
+		    fsBtn = createEle("button");
 
-        dp.innerHTML = "test";
+		fsBtn.innerHTML = "⬜";
+
+        dp.append(fsBtn);
         dp.className = "dp";
 
 		dvContain.append(dp);

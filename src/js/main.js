@@ -14,11 +14,23 @@ myUI = {
 		    fsBtn = createEle("button");
 
 		fsBtn.innerHTML = "⬜";
+		fsBtn.onclick = myUI.toggleFullScreen();
 
         dp.append(fsBtn);
         dp.className = "dp";
 
 		dvContain.append(dp);
+	},
+	toggleFullScreen: () => {
+        return function(){
+			if (!document.fullscreenElement) {
+            	document.documentElement.requestFullscreen();
+        	} else {
+            	if (document.exitFullscreen) {
+                	document.exitFullscreen();
+                }
+            }
+        }
 	}
 };
 

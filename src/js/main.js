@@ -14,6 +14,7 @@ myUI = {
 		    fsBtn = createEle("button");
 
 		fsBtn.innerHTML = "⬜";
+		fsBtn.className = "fsBtn";
 		fsBtn.onclick = myUI.toggleFullScreen();
 
         dp.append(fsBtn);

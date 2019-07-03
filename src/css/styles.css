@@ -1,24 +1,38 @@
 /**/
 body {
-	background-image: url("../assets/space.jpg");
-    background-size: 1920px 1078px;
-	background-repeat: no-repeat;
+	background-color:#020416;
 	margin: 0;
 	padding: 0;
 	height: 100vh;
 	width: 100vw;
 }
+button {
+	background-color: transparent;
+	border:none;
+	outline: none;
+	box-shadow: 0 0 14px white inset;
+}
+button:active {
+	box-shadow: 0 0 2px darkgrey inset;
+}
+button:disabled {
+	box-shadow: 0 0 2px darkgrey inset;
+}
 /*CLASS*/
 .dp {
-	background-color: transparent;
+	background-color: #020612;
 	margin: 0;
-	padding: 0;
-	height: 100vh;
-	width: 3vw;
+	padding: 6px;
+	height: auto;
+	width: 3.4vw;
 	text-align: center;
+	box-shadow: 0 0 4px white inset;
 }
-.fsBtn {
-	margin:2px 0;
+.btns, .gBtns {
+	margin:3px 0;
+	height: 3vw;
+	width: 3vw;
+	color:#FFF;
 }
 /*ID*/
 #dvContain {

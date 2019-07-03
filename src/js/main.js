@@ -1,5 +1,5 @@
-var myUI;
-
+var myUI,addBtnNames;
+addBtnNames = ["+","$","#","@","()","~","[]","j","a","y","!"];
 myUI = {
 	init: () => {
         var h, w;
@@ -14,10 +14,20 @@ myUI = {
 		    fsBtn = createEle("button");
 
 		fsBtn.innerHTML = "⬜";
-		fsBtn.className = "fsBtn";
+		fsBtn.className = "btns";
 		fsBtn.onclick = myUI.toggleFullScreen();
 
         dp.append(fsBtn);
+
+        for(var i = 0; i < addBtnNames.length; i++){
+        	var addBtns = createEle("button");
+
+        	addBtns.innerHTML = addBtnNames[i];
+        	addBtns.disabled = true;
+			addBtns.className = "gBtns";
+
+        	dp.append(addBtns);
+        }
         dp.className = "dp";
 
 		dvContain.append(dp);

@@ -1,5 +1,5 @@
 var myUI,addBtnNames;
-addBtnNames = ["+","$","#","@","()","~","[]","j","a","y","!"];
+addBtnNames = ["➕","💲","🔘", "▶"];
 myUI = {
 	init: () => {
         var h, w;
@@ -23,7 +23,7 @@ myUI = {
         	var addBtns = createEle("button");
 
         	addBtns.innerHTML = addBtnNames[i];
-        	addBtns.disabled = true;
+
 			addBtns.className = "gBtns";
 
         	dp.append(addBtns);

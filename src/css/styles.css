@@ -10,7 +10,7 @@ button {
 	background-color: transparent;
 	border:none;
 	outline: none;
-	box-shadow: 0 0 14px white inset;
+	box-shadow: 0 0 4px white inset;
 }
 button:active {
 	box-shadow: 0 0 2px darkgrey inset;
@@ -21,18 +21,20 @@ button:disabled {
 /*CLASS*/
 .dp {
 	background-color: #020612;
-	margin: 0;
-	padding: 6px;
+	margin: 2px;
+	padding: 5px;
 	height: auto;
-	width: 3.4vw;
-	text-align: center;
+	width: 35px;
+	display: -webkit-inline-box;
 	box-shadow: 0 0 4px white inset;
 }
 .btns, .gBtns {
 	margin:3px 0;
-	height: 3vw;
-	width: 3vw;
+	height: 35px;
+	width: 35px;
+	font-size: 15px;
 	color:#FFF;
+	text-align: center;
 }
 /*ID*/
 #dvContain {

@@ -1,40 +1,85 @@
-/**/
+/*DOM*/
 body {
 	background-color:#020416;
 	margin: 0;
 	padding: 0;
 	height: 100vh;
 	width: 100vw;
+	font-family: "Helvetica";
+	font-weight: 700;
+	font-size:110%;
 }
 button {
-	background-color: transparent;
+	background-color: silver;
+	color:#fff;
 	border:none;
 	outline: none;
-	box-shadow: 0 0 4px white inset;
 }
 button:active {
 	box-shadow: 0 0 2px darkgrey inset;
 }
 button:disabled {
-	box-shadow: 0 0 2px darkgrey inset;
+	opacity: 0.3;
+	background-color: darkgrey;
+	box-shadow: 0 0 2px black inset,0 0 4px black inset, 0 0 8px black inset;
+}
+input {
+	outline-color:gold;
 }
 /*CLASS*/
 .dp {
-	background-color: #020612;
-	margin: 2px;
+	margin: 12px 0 0 7px;
 	padding: 5px;
 	height: auto;
-	width: 35px;
-	display: -webkit-inline-box;
-	box-shadow: 0 0 4px white inset;
+	width: 45px;
+	
 }
 .btns, .gBtns {
 	margin:3px 0;
-	height: 35px;
-	width: 35px;
+	height: 45px;
+	width: 45px;
 	font-size: 15px;
 	color:#FFF;
 	text-align: center;
+	background-repeat: no-repeat;
+	background-size: 45px 45px;
+	background-position: center;
+}
+.myWorld {
+	background-color: white;
+	background-repeat: no-repeat;
+	background-size: 150% 150%;
+	background-position: center;
+	position: fixed;
+	cursor: pointer;
+}
+.timerCase {
+	display: inline-block;
+	position: absolute;
+	top:12px;
+	right:7px;
+	width: 200px;
+	line-height: 30px;
+}
+.timerIn {
+	width: 131px;
+    line-height: 30px;
+	text-align: right;
+	float: right;
+	padding-right:10px;
+}
+.timerLabel {
+	width: 55px;
+    line-height: 36px;
+
+	text-align: center;
+	display: inline-block;
+}
+.popup {
+	background-color: #fff;
+	padding: 1px 3px;
+	font-size: 60%;
+	border:1px solid black;
 }
 /*ID*/
 #dvContain {
@@ -44,3 +89,17 @@ button:disabled {
 	height: 100vh;
 	width: 100vw;
 }
+
+/*MULTIS*/
+.dp {
+	display: -webkit-inline-box;
+}
+.timerCase,.timerLabel,.dp {
+	background-color: grey;
+	color: lightgrey;
+	text-shadow: 1px 1px 1px black;
+}
+.dp, .timerLabel, button {
+	box-shadow:0 0 1px white inset,0 0 2px white inset, 0 0 4px white inset;
+}
+/*KEYFRAMES*/

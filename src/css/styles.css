@@ -28,11 +28,18 @@ input {
 }
 /*CLASS*/
 .dp {
+	margin: 12px -100px 0 7px;
+	padding: 5px;
+	height: auto;
+	width: 45px;
+	opacity: 1;
+}
+.dp_full {
 	margin: 12px 0 0 7px;
 	padding: 5px;
 	height: auto;
 	width: 45px;
-	
+	opacity: 1;
 }
 .btns, .gBtns {
 	margin:3px 0;
@@ -90,11 +97,25 @@ input {
 	width: 100vw;
 }
 
+#mycanvas {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 20px;
+    height: 20px;
+    text-shadow: 0 1px 2px white, 0 -1px 2px white;
+}
 /*MULTIS*/
+.dp,.dp_full{
+	transition:300ms all;
+}
 .dp {
+	display: none;
+}
+.dp_full {
 	display: -webkit-inline-box;
 }
-.timerCase,.timerLabel,.dp {
+.timerCase,.timerLabel,.dp,.dp_full {
 	background-color: grey;
 	color: lightgrey;
 	text-shadow: 1px 1px 1px black;

@@ -117,10 +117,11 @@ myUI = {
 
         	dp.append(addBtns);
         }
-        dp.className = "dp";
+        dp.className = "dp_full";
 
         myWorld.innerHTML = "&nbsp;";
         myWorld.className = "myWorld";
+        myWorld.id = www.status;
         myWorld.style.height = uuu.planet_size + "px";
         myWorld.style.width = uuu.planet_size + "px";
         myWorld.style.left = +((w / 2) - (uuu.planet_size / 2)) + "px";
@@ -193,7 +194,36 @@ myUI = {
 		}
 	},
 	neutronSwipe: function(addBtns,i,addBtnNames,uuu,www){
-		console.log(www);
+		var dp = addBtns.parentNode, dvContain = dp.parentNode, body = dvContain.parentNode;
+		var myWorld = bySel("#" + www.status);
+		takeFull(dp);
+
+		function Thing(x, y){
+			this.x = x;
+			this.y = y;
+		}
+
+		var mousePos = new Thing(0, 0);
+	    var mycanvas = createEle("div");
+
+	    mycanvas.id = "mycanvas";
+    
+	    body.addEventListener('mousemove', function(event){
+			mousePos.x = event.clientX;
+			mousePos.y = event.clientY;
+	        
+	        mycanvas.innerHTML = addBtns.innerHTML;
+	        mycanvas.style.top = mousePos.y + "px";
+	        mycanvas.style.left = mousePos.x + "px";
+
+		}, false);
+		body.addEventListener('mousedown', function(event){
+
+		}, false);
+	    body.style.cursor = 'none';
+		body.append(mycanvas);
+		myWorld.disabled = true;
+		//console.log(myWorld)
 	},
 	senseBtns: function(addBtns,i,addBtnNames,uuu,www){
 		return function(){

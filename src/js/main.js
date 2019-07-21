@@ -1,4 +1,4 @@
-var myUI,addBtnNames,userdata,btnLabel;
+var myUI,addBtnNames,userdata,btnLabel, worlddata;
 
 addBtnNames = ["🔳","⚫","🔴","🔵","⚪","🔘", "▶"];
 btnLabel = ["TOGGLE SCREEN","NEUTRON","PROTON","ELECTRON","PHOTON","ATOM", "TIME"];
@@ -25,19 +25,29 @@ userdata = {
 	beings: 0,
 	spaceship: 0
 };
-
+worlddata = {
+	mass: 0,
+	status: "HIGGS",
+	charge: 0,
+	spin: 0,
+	climate: "",
+	events: {},
+	log: {}
+};
 myUI = {
 	init: () => {
         var h, w;
+		LSinit("worldData", worlddata);
 		LSinit("userData", userdata);
 		var uuu = parseLS("userData");
+		var www = parseLS("worldData");
 
 		h = myHeight();
 		w = myWidth();
 
-		myUI.loader(h,w,uuu);
+		myUI.loader(h,w,uuu,www);
 	},
-	loader: (h,w,uuu) => {
+	loader: (h,w,uuu,www) => {
 		var dp = createEle("div"), timerCase = createEle("div"), 
 		    timerIn = createEle("input"), timerLabel = createEle("label"),
 		    myWorld = createEle("div");
@@ -98,8 +108,8 @@ myUI = {
 				bool = false;
 			}
 
-        	addBtns.onclick = myUI.senseBtns(addBtns,i,addBtnNames,uuu);
- 			addBtns.onmouseover = myUI.overOn(addBtns,i,addBtnNames,uuu);
+        	addBtns.onclick = myUI.senseBtns(addBtns,i,addBtnNames,uuu,www);
+ 			addBtns.onmouseover = myUI.overOn(addBtns,i,addBtnNames,uuu,www);
  			addBtns.innerHTML = addBtnNames[i];
  			addBtns.disabled = bool;
 
@@ -115,17 +125,17 @@ myUI = {
         myWorld.style.width = uuu.planet_size + "px";
         myWorld.style.left = +((w / 2) - (uuu.planet_size / 2)) + "px";
         myWorld.style.top = +((h / 2) - (uuu.planet_size / 2)) + "px";
-        myWorld.onmouseover = myUI.planetLookUp(myWorld,uuu);
+        myWorld.onmouseover = myUI.planetLookUp(myWorld,uuu,www);
 
 		dvContain.append(dp,timerCase,myWorld);
 	},
-	planetLookUp: function(myWorld,uuu){
+	planetLookUp: function(myWorld,uuu,www){
 		return function(){
 			var popup = createEle("span"),
 			    x = event.clientX,
 			    y = event.clientY;
 
-			popup.innerHTML = "SIZE:" + uuu.planet_size;
+			popup.innerHTML = "<p>SIZE:" + uuu.planet_size + "</p><p>TYPE: "+ www.status + "</p>";
 			popup.style.position = "fixed";
 			popup.className = "popup";
 			popup.style.left = (x + 10) + "px";
@@ -137,7 +147,7 @@ myUI = {
 			//console.log(uuu.planet_size);
 		}
 	},
-	overOn: function(addBtns,i,addBtnNames,uuu){
+	overOn: function(addBtns,i,addBtnNames,uuu,www){
 		return function(){
 			var popup = createEle("span"),
 			    x = event.clientX,
@@ -182,10 +192,10 @@ myUI = {
 			popup.remove();
 		}
 	},
-	neutronSwipe: function(addBtns,i,addBtnNames,uuu){
-		console.log(uuu.neutron);
+	neutronSwipe: function(addBtns,i,addBtnNames,uuu,www){
+		console.log(www);
 	},
-	senseBtns: function(addBtns,i,addBtnNames,uuu){
+	senseBtns: function(addBtns,i,addBtnNames,uuu,www){
 		return function(){
 			var timerIn = bySel(".timerIn");
 			if(i === 0){
@@ -198,7 +208,7 @@ myUI = {
             	}
 			}
 			if(i === 1){
-				myUI.neutronSwipe(addBtns,i,addBtnNames,uuu);
+				myUI.neutronSwipe(addBtns,i,addBtnNames,uuu,www);
 			}
 			if(i === 2){
 
@@ -227,7 +237,7 @@ myUI = {
 					function loop(uuu){
 						setTimeout(function(){
 							uuu.day++;
-							saveLS("userData",uuu);
+							saveLS("userData",uuu,www);
 							timerIn.value = uuu.day;
 							addBtns.innerHTML = "▶";
 							addBtns.disabled = false;

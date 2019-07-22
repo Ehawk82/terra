@@ -41,7 +41,7 @@ input {
 	width: 45px;
 	opacity: 1;
 }
-.btns, .gBtns {
+.btns, .addBtns {
 	margin:3px 0;
 	height: 45px;
 	width: 45px;
@@ -87,6 +87,12 @@ input {
 	padding: 1px 3px;
 	font-size: 60%;
 	border:1px solid black;
+}
+.unit {
+	position: absolute;
+	width: 5px;
+	height: 5px;
+	border-radius: 50%;
 }
 /*ID*/
 #dvContain {

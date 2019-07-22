@@ -34,6 +34,7 @@ worlddata = {
 	climate: "",
 	events: {},
 	debris: {},
+	debrisCount: 1,
 	log: {}
 };
 myUI = {
@@ -119,6 +120,7 @@ myUI = {
 
         	dp.append(addBtns);
         }
+
         dp.className = "dp_full";
 
         myWorld.innerHTML = "&nbsp;";
@@ -129,8 +131,24 @@ myUI = {
         myWorld.style.left = +((w / 2) - (uuu.planet_size / 2)) + "px";
         myWorld.style.top = +((h / 2) - (uuu.planet_size / 2)) + "px";
         myWorld.onmouseover = myUI.planetLookUp(myWorld,uuu,vvv);
-
+        myUI.generateDebris(uuu,vvv);
 		dvContain.append(dp,timerCase,myWorld);
+	},
+	generateDebris: function(uuu,vvv){
+		for(var b = 1; b < vvv.debrisCount; b++){
+			var unit = createEle("div"),
+			    vDebris = vvv.debris;
+
+			unit.innerHTML = "nbsp;";
+			unit.className = "unit";
+			unit.style.backgroundColor = "darkgrey";
+			unit.style.top = vDebris[b][2] + "px";
+	        unit.style.left = vDebris[b][1] + "px";
+            unit.style.backgroundColor = vDebris[b][4];
+			body.append(unit);
+
+		}
+		
 	},
 	planetLookUp: function(myWorld,uuu,vvv){
 		return function(){
@@ -228,9 +246,6 @@ myUI = {
 	    body.style.cursor = 'none';
 		body.append(mycanvas);
 		myWorld.disabled = true;
-
-		//body.onclick = function(){ myUI.placeUnit(event,mycanvas,myWorld,addBtns,i,addBtnNames,uuu,vvv)};
-		//console.log(myWorld);
 	},
 	placeUnit: function(event){
 			var unit = createEle("div"),
@@ -245,7 +260,7 @@ myUI = {
 			for (var b = 0; b < addBtns.length; b++) {
 				if(b === 1){
 					uuu.neutron = uuu.neutron - 1;
-					bkgnd = "darkgrey";
+					bkgnd = "slategrey";
 				    if(uuu.neutron <= 0){
 				    	addBtns[b].disabled = true;
 				    }
@@ -253,20 +268,24 @@ myUI = {
 				}
 	
 			}
-
-			for (var d = 0; d < [vvv.debris].length; d++) {
+			for (var d = 0; d < vvv.debrisCount; d++) {
+				d = vvv.debrisCount + 1;
 				var dTemplate = [
-					key = d++,
+					key = vvv.debrisCount,
 					x = event.clientX,
 					y = event.clientY,
+					speed = 0,
+					color = bkgnd,
 					name = btnLabel[c]
 				];
-				vvv.debris[d] = dTemplate;
-				//console.log(d);
+		
+				vvv.debris[vvv.debrisCount] = dTemplate;
+				
+		    	vvv.debrisCount = d;
 			}
 
 			saveLS("userData", uuu);
-			saveLS("worldData", vvv);
+ 			saveLS("worldData", vvv);
 
 			unit.innerHTML = "nbsp;";
 			unit.className = "unit";

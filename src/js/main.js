@@ -131,7 +131,7 @@ myUI = {
         myWorld.style.left = +((w / 2) - (uuu.planet_size / 2)) + "px";
         myWorld.style.top = +((h / 2) - (uuu.planet_size / 2)) + "px";
         myWorld.onmouseover = myUI.planetLookUp(myWorld,uuu,vvv);
-        myUI.generateDebris(uuu,vvv);
+        //myUI.generateDebris(uuu,vvv);
 		dvContain.append(dp,timerCase,myWorld);
 	},
 	generateDebris: function(uuu,vvv){
@@ -272,8 +272,8 @@ myUI = {
 				d = vvv.debrisCount + 1;
 				var dTemplate = [
 					key = vvv.debrisCount,
-					x = event.clientX,
-					y = event.clientY,
+					x = Math.round(event.clientX),
+					y = Math.round(event.clientY),
 					speed = 0,
 					color = bkgnd,
 					name = btnLabel[c]
@@ -303,6 +303,64 @@ myUI = {
 			makeFull(dp);
 
 			body.removeEventListener('mousedown', myUI.placeUnit, true);
+	},
+	guideDebris: function(){
+		var vvv = parseLS("worldData"),
+			uuu = parseLS("userData"),
+			unit = bySelAll(".unit"),
+		    vDebris = vvv.debris,h,w,hW,hH;
+
+		h = myHeight();
+		w = myWidth();
+
+		hH = h / 2;
+		hW = w / 2;
+
+
+		for(var u = 0; u < unit.length; u++){
+			unit[u].remove();
+		}
+        for(var d = 1; d < vvv.debrisCount; d++){
+            //x
+
+            if(vvv.debris[d][1] < hW){
+            	vvv.debris[d][1] = vvv.debris[d][1] + 1;
+            }
+            if(vvv.debris[d][1] > hW){
+            	vvv.debris[d][1] = vvv.debris[d][1] - 1;
+            }
+            //y
+            if(vvv.debris[d][2] < hH){
+            	vvv.debris[d][2] = vvv.debris[d][2] + 1;
+            }
+        	if(vvv.debris[d][2] > hH){
+            	vvv.debris[d][2] = vvv.debris[d][2] - 1;
+            }
+            //y == x
+            //console.log(vvv.debris[d][2]);
+            //console.log(hH);
+            if(+vvv.debris[d][1] === +hW){
+            	//localStorage.removeItem(vvv.debris[d]);
+            	delete vvv.debris[d],
+            	    --vvv.debrisCount,
+            	    myUI.calculateKeys();
+
+            }
+        }
+        
+		saveLS("worldData", vvv);
+		myUI.generateDebris(uuu,vvv);
+	},
+	calculateKeys: function(){
+		var vvv = parseLS("worldData");
+		var dB = vvv.debrisCount - 1,
+		    vDebris = vvv.debris;
+
+		for(var v = 1; v < dB; v++){
+			//vvv.debris[v][0] = v;
+			console.log(vvv.debris[v]);
+		}
+		saveLS("worldData", vvv);
 	},
 	senseBtns: function(addBtns,i,addBtnNames,uuu,vvv){
 		return function(){
@@ -340,7 +398,7 @@ myUI = {
 					}
 					addBtns.innerHTML = "⌛";
 					addBtns.disabled = true;
-
+					myUI.guideDebris(uuu,vvv);
 					loop(uuu);
 
 					function loop(uuu){
@@ -350,7 +408,7 @@ myUI = {
 							timerIn.value = uuu.day;
 							addBtns.innerHTML = "▶";
 							addBtns.disabled = false;
-						},5000);
+						},100);
 					};
 				} else {
 					addBtns.innerHTML = "▶";
